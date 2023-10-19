@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is deploying on production
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   deploy:
     name:
