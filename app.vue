@@ -1,6 +1,6 @@
 <template>
-  <h1>CloudFront Caching with OAI!</h1>
   <div>
-    <NuxtWelcome />
+    <!-- Markup shared across all pages, ex: NavBar -->
+    <NuxtPage />
   </div>
 </template>
