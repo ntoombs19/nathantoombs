@@ -35,7 +35,7 @@ jobs:
         run: bun install
 
       - name: Build the software
-        run: bun run build
+        run: bun run generate
 
       - name: Copy files to the test website with the AWS CLI
-        run: aws s3 sync dist/ ${{ env.AWS_BUCKET_NAME }}
+        run: aws s3 sync .output/public/ ${{ env.AWS_BUCKET_NAME }}
