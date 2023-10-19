@@ -38,4 +38,4 @@ jobs:
         run: bun run generate
 
       - name: Copy files to the test website with the AWS CLI
-        run: aws s3 sync .output/public/ ${{ env.AWS_BUCKET_NAME }}
+        run: aws s3 sync .output/public/ ${{ secrets.AWS_BUCKET_NAME }}
