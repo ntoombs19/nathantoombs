@@ -1,0 +1,40 @@
+name: deploy-prod
+run-name: ${{ github.actor }} is deploying on production
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Bun.js
+        uses: oven-sh/setup-bun@v1
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          fail_on_empty: false
+
+      - name: "Let's Cat"
+        run: cat .env
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build the software
+        run: bun run build
+
+      - name: Copy files to the test website with the AWS CLI
+        run: aws s3 sync dist/ ${{ env.AWS_BUCKET_NAME }}
