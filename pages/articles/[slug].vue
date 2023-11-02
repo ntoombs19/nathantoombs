@@ -1,21 +1,9 @@
 <template>
-  <pre>{{response}}</pre>
+  <pre>{{ data.articles.data }}</pre>
 </template>
 
-<script>
-import {GET_ALL_ARTICLES} from "~/graphql/queries.js";
-
-export default {
-  data() {
-    return {
-      articles: []
-    }
-  },
-  apollo: {
-    articles: {
-      prefetch: true,
-      query: GET_ALL_ARTICLES,
-    }
-  }
-}
+<script lang="ts" setup>
+const route = useRoute()
+import { GET_ARTICLE_BY_SLUG } from "~/graphql/articles";
+const { data } = await useAsyncQuery(GET_ARTICLE_BY_SLUG, { slug: route.params.slug })
 </script>

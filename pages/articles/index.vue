@@ -1,26 +1,13 @@
 <template>
-  <pre>{{ articles }}</pre>
-  <ul>
-    <li v-for="article in articles.data" :key="article.id">
-      <NuxtLink :to="`/articles/${article.attributes.slug}`">{{ article.attributes.title }}</NuxtLink>
-    </li>
-  </ul>
+  <pre>{{ data.articles.data }}</pre>
+  <h1>Articles</h1>
+  <li v-for="article in data.articles?.data" :key="article.id">
+    <NuxtLink :to="`/articles/${article.attributes?.slug}`">{{ article.attributes.title }}</NuxtLink>
+  </li>
+
 </template>
 
-<script>
-import { GET_ALL_ARTICLES } from "~/graphql/queries";
-
-export default {
-  data() {
-    return {
-      articles: []
-    }
-  },
-  apollo: {
-    articles: {
-      prefetch: true,
-      query: GET_ALL_ARTICLES,
-    }
-  }
-}
+<script lang="ts" setup>
+import { GET_ALL_ARTICLES } from "~/graphql/articles";
+const { data } = await useAsyncQuery(GET_ALL_ARTICLES, { pagination: { page: 1 }})
 </script>
