@@ -1,20 +1,39 @@
-import {gql} from "graphql-tag"
-const query=  `
+import {graphql} from "~/types/gql";
+
+export default graphql(`
     query getArticleBySlug($slug: String) {
         articles(filters:{slug:{eq:$slug}}) {
             data {
                 attributes {
                     title
-                    slug
                     summary
-                    isFeatured
+                    mainImage {
+                        data {
+                            attributes {
+                                alternativeText
+                                width
+                                height
+                                url
+                            }
+                        }
+                    }
                     content
-                    createdAt
-                    updatedAt
+                    seo {
+                        metaTitle
+                        metaDescription
+                        metaImage {
+                            data {
+                                attributes {
+                                    url
+                                }
+                            }
+                        }
+                        keywords
+                        metaRobots
+                    }
                     publishedAt
+                    updatedAt
                 }
             }
         }
-    }`
-
-export default query
+    }`)

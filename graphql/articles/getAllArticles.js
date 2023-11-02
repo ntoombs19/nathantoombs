@@ -1,8 +1,8 @@
-import { gql } from "graphql-tag"
+import { graphql } from "~/types/gql";
 
-export default `
-    query getAllArticles($pagination: PaginationArg) {
-        articles(pagination: $pagination) {
+export default graphql(`
+    query getAllArticles($pagination: PaginationArg, $sort: [String]) {
+        articles(pagination: $pagination, sort: $sort) {
             data {
                 attributes {
                     mainImage {
@@ -53,4 +53,4 @@ export default `
                 }
             }
         }
-    }`
+    }`)

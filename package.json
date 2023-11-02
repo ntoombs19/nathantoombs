@@ -4,15 +4,17 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "develop": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "env": "doppler secrets download --no-file --format env > .env",
-    "strapi:get-types": "graphql-codegen --require 'dotenv/config' --config codegen.ts   "
+    "strapi:types": "graphql-codegen --require 'dotenv/config' --config codegen.ts   "
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.0",
+    "@graphql-codegen/client-preset": "4.1.0",
+    "@graphql-codegen/introspection": "4.0.0",
     "@graphql-codegen/typescript": "^4.0.1",
     "@nuxt/devtools": "latest",
     "@nuxt/types": "^2.17.2",
@@ -22,8 +24,9 @@
     "graphql-tag": "^2.12.6",
     "nuxt": "^3.7.4",
     "vue": "^3.3.4",
-    "vue-router": "^4.2.5",
-    "@graphql-codegen/introspection": "4.0.0",
-    "@graphql-codegen/client-preset": "4.1.0"
+    "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "@nuxt/image": "^1.0.0"
   }
 }
